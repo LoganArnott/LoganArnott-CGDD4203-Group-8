@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     {
         dragDistance = Screen.width * 15 / 100;
         cam = Camera.main;
+        Vector3 temp = cam.ScreenToWorldPoint(new Vector3(Screen.width * 50 / 100, Screen.height * 15 / 100, 0));
+        transform.position = new Vector3(temp.x, temp.y, transform.position.z);
         targetPosition = transform.position;
     }
 
@@ -94,8 +96,8 @@ public class PlayerController : MonoBehaviour
     {
         // Checks if the player is at the right of the screen and has already swiped before lifting their finger
         if(positionCheck != 1 && !swiped) {
-            Vector3 tempPosition = cam.ScreenToWorldPoint(new Vector3(Screen.width * 20 / 100, 0, 0));
-            targetPosition = new Vector3(transform.position.x - tempPosition.x, -2.5f, 0);
+            Vector3 tempPosition = cam.ScreenToWorldPoint(new Vector3(Screen.width * 20 / 100, Screen.height * 15 / 100, 0));
+            targetPosition = new Vector3(transform.position.x - tempPosition.x, tempPosition.y, 0);
             positionCheck += 1;
         }
 
@@ -107,8 +109,8 @@ public class PlayerController : MonoBehaviour
     {
         // Checks if the player is at the left of the screen and has already swiped before lifting their finger
         if(positionCheck != -1 && !swiped) {
-            Vector3 tempPosition = cam.ScreenToWorldPoint(new Vector3(Screen.width * 20 / 100, 0, 0));
-            targetPosition = new Vector3((transform.position.x + tempPosition.x), -2.5f, 0);
+            Vector3 tempPosition = cam.ScreenToWorldPoint(new Vector3(Screen.width * 20 / 100, Screen.height * 15 / 100, 0));
+            targetPosition = new Vector3((transform.position.x + tempPosition.x), tempPosition.y, 0);
             positionCheck -= 1;
         }
 
