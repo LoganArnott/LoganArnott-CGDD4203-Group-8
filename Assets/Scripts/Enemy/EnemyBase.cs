@@ -12,6 +12,28 @@ public abstract class EnemyBase : MonoBehaviour
     protected Vector3 targetPosition;
     protected Camera cam;
 
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Movement();
+        // Destroys enemy if it goes below the screen
+        if(transform.position.y <= targetPosition.y) {
+            Destroy(gameObject);
+        }
+
+        // Destroys enemy is health == 0
+        if( health == 0) {
+            Destroy(gameObject);
+            GameObject.Find("Scorekeeper").GetComponent<Score>().EnemyPoints(points);
+        }
+    }
+
     // Set targetPosition to bottom of screen
     public virtual void TargetPosition()
     {
@@ -24,11 +46,11 @@ public abstract class EnemyBase : MonoBehaviour
     public virtual void SpeedMultipler()
     {
         timeElapsedCheck = GameObject.Find("Scorekeeper").GetComponent<Score>().timeElapsed;
-        timeElapsedMultiplier = timeElapsedCheck / 60f;
-        if(timeElapsedCheck > 30f && timeElapsedCheck < 300f) {
+        timeElapsedMultiplier = timeElapsedCheck / 40f;
+        if(timeElapsedCheck > 20f && timeElapsedCheck < 180f) {
             speed *= timeElapsedMultiplier;
-        } else if(timeElapsedCheck > 300f) {
-            speed *= 5f;
+        } else if(timeElapsedCheck > 180f) {
+            speed *= 4.5f;
         } else {
             speed = 2.5f;
         }

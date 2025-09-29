@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 1284765081004600189}
   - component: {fileID: 6124740555125250409}
   - component: {fileID: 1978636541658060387}
-  - component: {fileID: 2479929824781082172}
+  - component: {fileID: 814000028966444959}
   - component: {fileID: 7385979736184985106}
   m_Layer: 0
   m_Name: TempEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,7 +87,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2479929824781082172
+--- !u!65 &814000028966444959
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

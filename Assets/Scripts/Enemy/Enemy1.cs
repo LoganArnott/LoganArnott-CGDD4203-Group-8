@@ -10,18 +10,21 @@ public class Enemy1 : EnemyBase
     {
         SpeedMultipler();
         TargetPosition();
-        points = 40;
+        points = 50;
         health = 5;
 
     }
 
-    // Update is called once per frame
-    void Update()
+    // // Update is called once per frame
+    // void Update()
+    // {
+
+    // }
+
+    public virtual void OnCollisionEnter(Collision collision)
     {
-        Movement();
-        // Destroys enemy if it goes below the screen
-        if(transform.position.y <= targetPosition.y) {
-            Destroy(gameObject);
+        if(collision.gameObject.tag == "Bullet") {
+            health -= 1;
         }
     }
 }

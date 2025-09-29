@@ -11,11 +11,13 @@ public class Score : MonoBehaviour
     Vector3 left;
     Vector3 middle;
     Vector3 right;
+    float score;
 
     // Start is called before the first frame update
     void Start()
     {
         timeElapsed = 0;
+        score = 0;
 
         // Positions of left/middle/right for the enemies
         cam = Camera.main;
@@ -38,6 +40,8 @@ public class Score : MonoBehaviour
             timer -= Time.deltaTime;
         }
 
+        // Score
+        score += Time.deltaTime;
     }
 
     // Enemy spawn coroutine
@@ -61,5 +65,10 @@ public class Score : MonoBehaviour
         }
         // Ends the coroutine
         StopCoroutine(EnemySpawn());
+    }
+
+    public void EnemyPoints(float points)
+    {
+        score += points;
     }
 }
