@@ -34,7 +34,7 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
-    // Parent movement method
+    // Movement method
     public virtual void Movement()
     {
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);

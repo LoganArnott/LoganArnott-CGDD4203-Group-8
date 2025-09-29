@@ -19,6 +19,7 @@ public class Enemy1 : EnemyBase
     void Update()
     {
         Movement();
+        // Destroys enemy if it goes below the screen
         if(transform.position.y <= targetPosition.y) {
             Destroy(gameObject);
         }
