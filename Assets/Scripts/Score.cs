@@ -5,7 +5,7 @@ using UnityEngine;
 public class Score : MonoBehaviour
 {
     public float timeElapsed;
-    public GameObject enemy;
+    public GameObject[] enemies;
     float timer = 0.5f;
     Camera cam;
     Vector3 left;
@@ -49,20 +49,25 @@ public class Score : MonoBehaviour
     {
         // Waits randomly between 1 and 15 seconds before spawning the enemy
         yield return new WaitForSeconds(Random.Range(1f, 15f));
+
         // Randomly select left/middle/right to spawn
+        Vector3 spawnPos = middle;
         int randomLocation = Random.Range(1, 4);
-        // Spawns enemy
-        switch(randomLocation) {
-            case 1:
-                GameObject enem1 = Instantiate (enemy, new Vector3(left.x, 5, 0), Quaternion.identity) as GameObject;
-                break;
-            case 2:
-                GameObject enem2 = Instantiate (enemy, new Vector3(middle.x, 5, 0), Quaternion.identity) as GameObject;
-                break;
-            case 3:
-                GameObject enem3 = Instantiate (enemy, new Vector3(right.x, 5, 0), Quaternion.identity) as GameObject;
-                break;
+
+        // Picks Location enemy
+        switch (randomLocation)
+        {
+            case 1: spawnPos = left; break;
+            case 2: spawnPos = middle; break;
+            case 3: spawnPos = right; break;
         }
+        //Picks from an array of enemies
+        if (enemies.Length > 0)
+        {
+            int randomEnemy = Random.Range(0, enemies.Length);
+            Instantiate(enemies[randomEnemy], new Vector3(spawnPos.x, 5, 0), Quaternion.identity);
+        }
+
         // Ends the coroutine
         StopCoroutine(EnemySpawn());
     }

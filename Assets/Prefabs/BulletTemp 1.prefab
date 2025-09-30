@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 1407421800581414466}
   - component: {fileID: 7688879781869443938}
   m_Layer: 0
-  m_Name: BulletTemp
-  m_TagString: Bullet
+  m_Name: BulletTemp 1
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,7 +138,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1146421151, guid: d42d1b0ae96861b4792797986682623b, type: 3}
+  m_Sprite: {fileID: 1542485741, guid: d42d1b0ae96861b4792797986682623b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

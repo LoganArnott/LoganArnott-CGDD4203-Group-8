@@ -11,7 +11,7 @@ public class Enemy1 : EnemyBase
         SpeedMultipler();
         TargetPosition();
         points = 50;
-        health = 5;
+        health = 3;
 
     }
 
