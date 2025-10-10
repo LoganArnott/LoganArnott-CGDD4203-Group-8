@@ -33,9 +33,9 @@ public class BossEnemy : EnemyBase
     }
 
 
-    public virtual void OnCollisionEnter(Collision collision)
+    public virtual void OnTriggerEnter(Collider col)
     {
-        if (collision.gameObject.tag == "Bullet")
+        if (col.gameObject.tag == "Bullet")
         {
             health -= 1;
         }

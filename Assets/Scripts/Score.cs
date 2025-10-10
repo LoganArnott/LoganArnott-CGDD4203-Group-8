@@ -12,6 +12,7 @@ public class Score : MonoBehaviour
     Vector3 middle;
     Vector3 right;
     float score;
+    int displayScore;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +43,7 @@ public class Score : MonoBehaviour
 
         // Score
         score += Time.deltaTime;
+        displayScore = (int)score;
     }
 
     // Enemy spawn coroutine

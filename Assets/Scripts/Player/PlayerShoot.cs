@@ -13,12 +13,19 @@ public class PlayerShoot : MonoBehaviour
     float startTime;
     float endTime;
     public GameObject bullet;
+    public GameObject itemBullet;
+    bool hasItem = true;
+    bool itemShoot = false;
+    Camera cam;
+    Vector3 height;
+    float timer = 5f;
 
     // Start is called before the first frame update
     void Start()
     {
         dragDistance = Screen.width * 10 / 100;
-        
+        cam = Camera.main;
+        height = cam.ScreenToWorldPoint(new Vector3(0, Screen.height, 0));
     }
 
     // Update is called once per frame
@@ -44,8 +51,12 @@ public class PlayerShoot : MonoBehaviour
                     endTime = Time.time;
                     // If its a click and not a hold/drag
                     if((Mathf.Abs(endTouchPosition.x - startTouchPosition.x)) < dragDistance && 
-                       (endTime - startTime) < 0.5f) {
+                       (endTime - startTime) < 0.5f && !itemShoot) {
                         Shoot();
+                    }
+                    if((Mathf.Abs(endTouchPosition.x - startTouchPosition.x)) < dragDistance && 
+                       (endTime - startTime) > 3f && hasItem) {
+                        ItemShoot();
                     }
                 }
             }
@@ -54,11 +65,22 @@ public class PlayerShoot : MonoBehaviour
         // Desktop
         #else
 
-        if(Input.GetKeyDown("space")) {
+        if(Input.GetKeyDown("space") && !itemShoot) {
             Shoot();
+        }
+        if(Input.GetKeyDown("left shift")) {
+            ItemShoot();
         }
 
         #endif
+
+        if(itemShoot) {
+            timer -= Time.deltaTime;
+            if(timer <= 0) {
+                itemShoot = false;
+                timer = 5f;
+            }
+        }
     }
 
     // Shoots a bullet
@@ -73,5 +95,18 @@ public class PlayerShoot : MonoBehaviour
         Rigidbody bulletRig = g.GetComponent<Rigidbody>();
         bulletRig.velocity = transform.up * speed;
         Destroy (g, 0.5f);
+    }
+
+    void ItemShoot()
+    {
+        itemShoot = true;
+        // Where the bullet will be created
+        Vector3 shotSpawn = new Vector3(transform.position.x, transform.position.y + (height.y / 1.25f), transform.position.z);
+        
+        // Creates 1 bullet at shotSpawn
+        GameObject g = Instantiate (itemBullet, shotSpawn, Quaternion.identity) as GameObject;
+        Rigidbody bulletRig = g.GetComponent<Rigidbody>();
+        Destroy (g, 5f);
+        // hasItem = false;
     }
 }

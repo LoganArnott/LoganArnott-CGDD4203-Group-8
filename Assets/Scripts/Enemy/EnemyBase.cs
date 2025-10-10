@@ -6,7 +6,7 @@ public abstract class EnemyBase : MonoBehaviour
 {
     protected float speed = 5;
     protected float points = 20;
-    protected float health = 3;
+    public float health = 3;
     protected float timeElapsedCheck;
     protected float timeElapsedMultiplier;
     protected Vector3 targetPosition;
@@ -28,7 +28,7 @@ public abstract class EnemyBase : MonoBehaviour
         }
 
         // Destroys enemy is health == 0
-        if( health == 0) {
+        if(health == 0) {
             Destroy(gameObject);
             GameObject.Find("Scorekeeper").GetComponent<Score>().EnemyPoints(points);
         }

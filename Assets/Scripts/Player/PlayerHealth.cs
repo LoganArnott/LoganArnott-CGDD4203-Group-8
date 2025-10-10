@@ -7,7 +7,7 @@ public class PlayerHealth : MonoBehaviour
     
     int health = 2;
     bool invincible = false;
-    float timer = 1.5f;
+    float timer = 3f;
     float healthTimer = 10f;
 
     // Update is called once per frame
@@ -18,7 +18,7 @@ public class PlayerHealth : MonoBehaviour
             timer -= Time.deltaTime;
             if(timer <= 0) {
                 invincible = false;
-                timer = 1.5f;
+                timer = 3f;
             }
         }
 
@@ -37,10 +37,9 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider col)
     {
-        if(collision.gameObject.tag == "Enemy" && !invincible) {
-            Debug.Log("hit");
+        if((col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyBullet") && !invincible) {
             health -= 1;
             invincible = true;
         }

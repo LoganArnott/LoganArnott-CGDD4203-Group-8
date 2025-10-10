@@ -13,12 +13,12 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider col)
     {
-        if(collision.gameObject.tag == "Enemy") {
+        if(col.gameObject.tag == "Enemy") {
             Destroy(gameObject);
         }
     }

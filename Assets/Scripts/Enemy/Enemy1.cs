@@ -15,15 +15,9 @@ public class Enemy1 : EnemyBase
 
     }
 
-    // // Update is called once per frame
-    // void Update()
-    // {
-
-    // }
-
-    public virtual void OnCollisionEnter(Collision collision)
+    public virtual void OnTriggerEnter(Collider col)
     {
-        if(collision.gameObject.tag == "Bullet") {
+        if(col.gameObject.tag == "Bullet") {
             health -= 1;
         }
     }
