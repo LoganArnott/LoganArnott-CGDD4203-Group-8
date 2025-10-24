@@ -2,40 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyBase : MonoBehaviour
+public class Stars : MonoBehaviour
 {
-    public float speed = 5;
-    protected float points = 20;
-    public float health = 3;
-    protected float timeElapsedCheck;
-    protected float timeElapsedMultiplier;
-    protected Vector3 targetPosition;
-    protected Camera cam;
+    float speed = 2;
+    float timeElapsedCheck;
+    float timeElapsedMultiplier;
+    Vector3 targetPosition;
+    Camera cam;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        SpeedMultipler();
+        TargetPosition();
     }
 
     // Update is called once per frame
     void Update()
     {
         Movement();
-        // Destroys enemy if it goes below the screen
+        // Destroys stars if it goes below the screen
         if(transform.position.y <= targetPosition.y) {
             Destroy(gameObject);
-        }
-
-        // Destroys enemy is health == 0
-        if(health == 0) {
-            Destroy(gameObject);
-            GameObject.Find("Scorekeeper").GetComponent<Score>().EnemyPoints(points);
         }
     }
 
     // Set targetPosition to bottom of screen
-    public virtual void TargetPosition()
+    public void TargetPosition()
     {
         cam = Camera.main;
         Vector3 tempPosition = cam.ScreenToWorldPoint(new Vector3(0, 0, 0));
@@ -43,7 +36,7 @@ public abstract class EnemyBase : MonoBehaviour
     }
 
     // Speed multiplier
-    public virtual void SpeedMultipler()
+    public void SpeedMultipler()
     {
         timeElapsedCheck = GameObject.Find("Scorekeeper").GetComponent<Score>().timeElapsed;
         timeElapsedMultiplier = timeElapsedCheck / 40f;
@@ -52,12 +45,12 @@ public abstract class EnemyBase : MonoBehaviour
         } else if(timeElapsedCheck > 180f) {
             speed *= 4.5f;
         } else {
-            speed = 2.5f;
+            speed = 1f;
         }
     }
 
     // Movement method
-    public virtual void Movement()
+    public void Movement()
     {
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
     }
