@@ -16,9 +16,9 @@ public class EnemyBullet : Bullet
         
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider col)
     {
-        if(collision.gameObject.tag == "Player") {
+        if(col.gameObject.tag == "Player") {
             Destroy(gameObject);
         }
     }

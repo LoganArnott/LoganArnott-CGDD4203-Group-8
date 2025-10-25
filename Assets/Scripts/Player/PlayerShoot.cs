@@ -14,7 +14,7 @@ public class PlayerShoot : MonoBehaviour
     float endTime;
     public GameObject bullet;
     public GameObject itemBullet;
-    bool hasItem = true;
+    bool hasItem = false;
     bool itemShoot = false;
     Camera cam;
     Vector3 height;
@@ -68,12 +68,13 @@ public class PlayerShoot : MonoBehaviour
         if(Input.GetKeyDown("space") && !itemShoot) {
             Shoot();
         }
-        if(Input.GetKeyDown("left shift")) {
+        if(Input.GetKeyDown("left shift") && hasItem) {
             ItemShoot();
         }
 
         #endif
 
+        // So you can't shoot until the item is finished being used
         if(itemShoot) {
             timer -= Time.deltaTime;
             if(timer <= 0) {
@@ -99,6 +100,7 @@ public class PlayerShoot : MonoBehaviour
 
     void ItemShoot()
     {
+        hasItem = false;
         itemShoot = true;
         // Where the bullet will be created
         Vector3 shotSpawn = new Vector3(transform.position.x, transform.position.y + (height.y / 1.25f), transform.position.z);
@@ -108,5 +110,12 @@ public class PlayerShoot : MonoBehaviour
         Rigidbody bulletRig = g.GetComponent<Rigidbody>();
         Destroy (g, 5f);
         // hasItem = false;
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if(col.gameObject.tag == "Item") {
+            hasItem = true;
+        }
     }
 }

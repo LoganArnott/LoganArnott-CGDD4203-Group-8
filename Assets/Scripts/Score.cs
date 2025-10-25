@@ -7,6 +7,7 @@ public class Score : MonoBehaviour
     public float timeElapsed;
     public GameObject[] enemies;
     public GameObject[] stars;
+    public GameObject item;
     float timer = 0.5f;
     Camera cam;
     Vector3 left;
@@ -64,10 +65,12 @@ public class Score : MonoBehaviour
         score += Time.deltaTime;
         displayScore = (int)score;
 
-        // Updates ammount of stars in background to correspond with speed
+        // Updates amount of stars in background to correspond with speed
         if(timeElapsed > 30f && timeElapsed < 60f && thirty) {
             StartCoroutine(StarsSpawn());
             StartCoroutine(StarsSpawn());
+            // Starts coroutine to spawn an item
+            StartCoroutine(ItemSpawn());
             thirty = false;
         } else if(timeElapsed > 60f && timeElapsed < 90f && sixty) {
             StartCoroutine(StarsSpawn());
@@ -130,8 +133,31 @@ public class Score : MonoBehaviour
     {
         // Loop to spawn stars
         while(true) {
-            yield return new WaitForSeconds(Random.Range(0.1f, 0.75f));
+            yield return new WaitForSeconds(Random.Range(0.1f, 1f));
             Instantiate(stars[Random.Range(0, stars.Length)], new Vector3(Random.Range(leftOfScreen.x, rightOfScreen.x), 5, 0), Quaternion.identity);
+        }
+    }
+
+    // Item spawn coroutine
+    IEnumerator ItemSpawn()
+    {
+        // Loop to spawn an item
+        while(true) {
+            yield return new WaitForSeconds(Random.Range(5f, 15f));
+            
+            // Randomly select left/middle/right to spawn
+            Vector3 spawnPos = middle;
+            int randomLocation = Random.Range(1, 4);
+
+            // Picks Location enemy
+            switch (randomLocation)
+            {
+                case 1: spawnPos = left; break;
+                case 2: spawnPos = middle; break;
+                case 3: spawnPos = right; break;
+            }
+
+            Instantiate(item, new Vector3(spawnPos.x, 5, 0), Quaternion.identity);
         }
     }
 }
