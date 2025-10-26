@@ -55,7 +55,7 @@ public class PlayerShoot : MonoBehaviour
                         Shoot();
                     }
                     if((Mathf.Abs(endTouchPosition.x - startTouchPosition.x)) < dragDistance && 
-                       (endTime - startTime) > 3f && hasItem) {
+                       (endTime - startTime) > 2f && hasItem) {
                         ItemShoot();
                     }
                 }
@@ -100,7 +100,6 @@ public class PlayerShoot : MonoBehaviour
 
     void ItemShoot()
     {
-        hasItem = false;
         itemShoot = true;
         // Where the bullet will be created
         Vector3 shotSpawn = new Vector3(transform.position.x, transform.position.y + (height.y / 1.25f), transform.position.z);
@@ -109,7 +108,7 @@ public class PlayerShoot : MonoBehaviour
         GameObject g = Instantiate (itemBullet, shotSpawn, Quaternion.identity) as GameObject;
         Rigidbody bulletRig = g.GetComponent<Rigidbody>();
         Destroy (g, 5f);
-        // hasItem = false;
+        hasItem = false;
     }
 
     void OnTriggerEnter(Collider col)
