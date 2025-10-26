@@ -30,7 +30,7 @@ public abstract class EnemyBase : MonoBehaviour
         // Destroys enemy is health == 0
         if(health == 0) {
             Destroy(gameObject);
-            GameObject.Find("Scorekeeper").GetComponent<Score>().EnemyPoints(points);
+            GameObject.Find("Game Manager").GetComponent<Score>().EnemyPoints(points);
         }
     }
 
@@ -45,7 +45,7 @@ public abstract class EnemyBase : MonoBehaviour
     // Speed multiplier
     public virtual void SpeedMultipler()
     {
-        timeElapsedCheck = GameObject.Find("Scorekeeper").GetComponent<Score>().timeElapsed;
+        timeElapsedCheck = GameObject.Find("Game Manager").GetComponent<Score>().timeElapsed;
         timeElapsedMultiplier = timeElapsedCheck / 40f;
         if(timeElapsedCheck > 20f && timeElapsedCheck < 180f) {
             speed *= timeElapsedMultiplier;

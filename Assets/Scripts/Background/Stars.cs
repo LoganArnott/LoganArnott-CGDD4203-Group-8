@@ -38,7 +38,7 @@ public class Stars : MonoBehaviour
     // Speed multiplier
     public void SpeedMultipler()
     {
-        timeElapsedCheck = GameObject.Find("Scorekeeper").GetComponent<Score>().timeElapsed;
+        timeElapsedCheck = GameObject.Find("Game Manager").GetComponent<Score>().timeElapsed;
         timeElapsedMultiplier = timeElapsedCheck / 40f;
         if(timeElapsedCheck > 20f && timeElapsedCheck < 180f) {
             speed *= timeElapsedMultiplier;
