@@ -33,6 +33,7 @@ public class PlayerHealth : MonoBehaviour
 
         // Death at health = 0
         if(health <= 0) {
+            GameObject.Find("Game Manager").GetComponent<SceneLoader>().GameOver();
             Destroy(gameObject);
         }
     }
