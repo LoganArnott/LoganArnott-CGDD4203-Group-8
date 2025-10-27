@@ -55,7 +55,7 @@ public class PlayerShoot : MonoBehaviour
                         Shoot();
                     }
                     if((Mathf.Abs(endTouchPosition.x - startTouchPosition.x)) < dragDistance && 
-                       (endTime - startTime) > 2f && hasItem) {
+                       (endTime - startTime) > 3f && hasItem) {
                         ItemShoot();
                     }
                 }
