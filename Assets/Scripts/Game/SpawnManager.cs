@@ -8,7 +8,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] enemies;
     public GameObject[] stars;
     public GameObject item;
-    float timer = 0.5f;
+    float timer;
     Camera cam;
     Vector3 left;
     Vector3 middle;
@@ -16,17 +16,25 @@ public class SpawnManager : MonoBehaviour
     Vector3 leftOfScreen;
     Vector3 rightOfScreen;
 
-    bool thirty = true;
-    bool sixty = true;
-    bool ninety = true;
-    bool oneTwenty = true;
-    bool oneFifty = true;
-    bool oneEighty = true;
+    bool thirty;
+    bool sixty;
+    bool ninety;
+    bool oneTwenty;
+    bool oneFifty;
+    bool oneEighty;
 
     // Start is called before the first frame update
     void Start()
     {
         timeElapsed = 0;
+        timer = 0.5f;
+
+        thirty = true;
+        sixty = true;
+        ninety = true;
+        oneTwenty = true;
+        oneFifty = true;
+        oneEighty = true;
 
         // Positions of left/middle/right for the enemies
         cam = Camera.main;

@@ -10,11 +10,11 @@ public class PlayerMovement : MonoBehaviour
     Vector2 startTouchPosition;
     Vector2 currentTouchPosition;
     // Used to check if player is to the left/right of screen
-    int positionCheck = 0;
+    int positionCheck;
     // Threshold to detect dragging touch
     float dragDistance;
     // Used to detect if the player has already swiped before lifting their finger
-    bool swiped = false;
+    bool swiped;
     Camera cam;
     // Where the player will move to
     Vector3 targetPosition;
@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        positionCheck = 0;
+        swiped = false;
         dragDistance = Screen.width * 15 / 100;
         cam = Camera.main;
         Vector3 temp = cam.ScreenToWorldPoint(new Vector3(Screen.width * 50 / 100, Screen.height * 15 / 100, 0));

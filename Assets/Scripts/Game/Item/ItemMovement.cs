@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemMovement : MonoBehaviour
 {
-    float speed = 2;
+    float speed;
     float timeElapsedCheck;
     float timeElapsedMultiplier;
     Vector3 targetPosition;
@@ -13,6 +13,7 @@ public class ItemMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        speed = 2;
         SpeedMultipler();
         TargetPosition();
     }

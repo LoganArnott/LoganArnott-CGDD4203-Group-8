@@ -9,12 +9,16 @@ public class Score : MonoBehaviour
     float score;
     int displayScore;
     public TMP_Text currentScore;
+    public TMP_Text highScore;
+    bool stopScore;
 
     // Start is called before the first frame update
     void Start()
     {
+        stopScore = false;
         timeElapsed = 0;
         score = 0;
+        highScore.text = "Highscore: " + PlayerPrefs.GetInt("Highscore").ToString();
     }
 
     // Update is called once per frame
@@ -24,7 +28,9 @@ public class Score : MonoBehaviour
         timeElapsed = Time.time;
 
         // Score
-        score += Time.deltaTime;
+        if(!stopScore) {
+            score += Time.deltaTime;
+        }
         displayScore = (int)score;
 
         currentScore.text = "Score: " + displayScore.ToString();
@@ -33,5 +39,11 @@ public class Score : MonoBehaviour
     public void EnemyPoints(float points)
     {
         score += points;
+    }
+
+    public void StopScore()
+    {
+        stopScore = true;
+        PlayerPrefs.SetInt("Highscore", displayScore);
     }
 }

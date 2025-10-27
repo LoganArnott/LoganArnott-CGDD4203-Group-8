@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossEnemy : EnemyBase
 {
     public GameObject Enembullet;
-    float timer = 0.5f;
+    float timer;
 
     // Start is called before the first frame update
     void Start()
@@ -14,6 +14,7 @@ public class BossEnemy : EnemyBase
         TargetPosition();
         points = 50;
         health = 10;
+        timer = 0.5f;
     }
 
     // Update is called once per frame

@@ -14,15 +14,18 @@ public class PlayerShoot : MonoBehaviour
     float endTime;
     public GameObject bullet;
     public GameObject itemBullet;
-    bool hasItem = false;
-    bool itemShoot = false;
+    bool hasItem;
+    bool itemShoot;
     Camera cam;
     Vector3 height;
-    float timer = 5f;
+    float timer;
 
     // Start is called before the first frame update
     void Start()
     {
+        hasItem = false;
+        itemShoot = false;
+        timer = 5f;
         dragDistance = Screen.width * 10 / 100;
         cam = Camera.main;
         height = cam.ScreenToWorldPoint(new Vector3(0, Screen.height, 0));

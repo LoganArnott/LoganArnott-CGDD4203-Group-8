@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    
-    int health = 2;
-    bool invincible = false;
-    float timer = 3f;
-    float healthTimer = 10f;
+    int health;
+    bool invincible;
+    float timer;
+    float healthTimer;
+
+    void Start()
+    {
+        health = 2;
+        invincible = false;
+        timer = 3f;
+        healthTimer = 10f;
+    }
 
     // Update is called once per frame
     void Update()
@@ -34,6 +41,7 @@ public class PlayerHealth : MonoBehaviour
         // Death at health = 0
         if(health <= 0) {
             GameObject.Find("Game Manager").GetComponent<SceneLoader>().GameOver();
+            GameObject.Find("Game Manager").GetComponent<Score>().StopScore();
             Destroy(gameObject);
         }
     }

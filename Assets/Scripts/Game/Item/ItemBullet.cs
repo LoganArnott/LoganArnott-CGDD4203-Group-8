@@ -7,6 +7,7 @@ public class ItemBullet : MonoBehaviour
     GameObject player;
     Camera cam;
     Vector3 height;
+    
     // Start is called before the first frame update
     void Start()
     {

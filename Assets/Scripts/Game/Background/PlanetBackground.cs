@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlanetBackground : MonoBehaviour
 {
-    float speed = 1f;
+    float speed;
     Vector3 targetPosition;
     Camera cam;
     Vector3 scale;
@@ -12,6 +12,7 @@ public class PlanetBackground : MonoBehaviour
     // Sets scale of background to screen size
     void Start()
     {
+        speed = 1f;
         cam = Camera.main;
         scale = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
         transform.localScale = new Vector3(scale.x / 2.5f, scale.y / 5f, 1f);

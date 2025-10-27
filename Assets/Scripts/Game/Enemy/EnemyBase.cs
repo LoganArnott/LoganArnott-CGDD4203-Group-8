@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class EnemyBase : MonoBehaviour
 {
-    public float speed = 5;
-    protected float points = 20;
-    public float health = 3;
+    public float speed;
+    protected float points;
+    public float health;
     protected float timeElapsedCheck;
     protected float timeElapsedMultiplier;
     protected Vector3 targetPosition;
@@ -15,7 +15,9 @@ public abstract class EnemyBase : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        speed = 5;
+        points = 20;
+        health = 3;
     }
 
     // Update is called once per frame
