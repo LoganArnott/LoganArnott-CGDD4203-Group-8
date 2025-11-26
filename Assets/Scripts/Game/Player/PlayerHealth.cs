@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class PlayerHealth : MonoBehaviour
     bool invincible;
     float timer;
     float healthTimer;
+    public Image health1;
+    public Image health2;
 
     void Start()
     {
@@ -15,6 +18,8 @@ public class PlayerHealth : MonoBehaviour
         invincible = false;
         timer = 3f;
         healthTimer = 10f;
+        health1.enabled = true;
+        health2.enabled = true;
     }
 
     // Update is called once per frame
@@ -35,6 +40,7 @@ public class PlayerHealth : MonoBehaviour
             if(healthTimer <= 0) {
                 health = 2;
                 healthTimer = 10f;
+                health2.enabled = true;
             }
         }
 
@@ -43,6 +49,7 @@ public class PlayerHealth : MonoBehaviour
             GameObject.Find("Game Manager").GetComponent<SceneLoader>().GameOver();
             GameObject.Find("Game Manager").GetComponent<Score>().StopScore();
             Destroy(gameObject);
+            health1.enabled = false;
         }
     }
 
@@ -51,6 +58,7 @@ public class PlayerHealth : MonoBehaviour
         if((col.gameObject.tag == "Enemy" || col.gameObject.tag == "EnemyBullet") && !invincible) {
             health -= 1;
             invincible = true;
+            health2.enabled = false;
         }
     }
 }

@@ -16,16 +16,20 @@ public class PlayerShoot : MonoBehaviour
     public GameObject itemBullet;
     bool hasItem;
     bool itemShoot;
+    bool shootDelay;
     Camera cam;
     Vector3 height;
     float timer;
+    float timer2;
 
     // Start is called before the first frame update
     void Start()
     {
         hasItem = false;
         itemShoot = false;
+        shootDelay = false;
         timer = 5f;
+        timer2 = 0.15f;
         dragDistance = Screen.width * 10 / 100;
         cam = Camera.main;
         height = cam.ScreenToWorldPoint(new Vector3(0, Screen.height, 0));
@@ -45,18 +49,22 @@ public class PlayerShoot : MonoBehaviour
                 // Position of touch and time at touch begin
                 if(touch.phase == TouchPhase.Began) {
                     startTouchPosition = Input.GetTouch(i).position;
-                    startTime = Time.time;
+                    startTime = Time.timeSinceLevelLoad;
                 }
 
                 // Position of touch and time at touch end
                 if(touch.phase == TouchPhase.Ended) {
                     endTouchPosition = Input.GetTouch(i).position;
-                    endTime = Time.time;
+                    endTime = Time.timeSinceLevelLoad;
                     // If its a click and not a hold/drag
                     if((Mathf.Abs(endTouchPosition.x - startTouchPosition.x)) < dragDistance && 
-                       (endTime - startTime) < 0.5f && !itemShoot) {
-                        Shoot();
+                       (endTime - startTime) < 0.15f && !itemShoot) {
+                        if(!shootDelay) {
+                            Shoot();
+                            shootDelay = true;
+                        }
                     }
+                    // Item Shoot
                     if((Mathf.Abs(endTouchPosition.x - startTouchPosition.x)) < dragDistance && 
                        (endTime - startTime) > 3f && hasItem) {
                         ItemShoot();
@@ -83,6 +91,15 @@ public class PlayerShoot : MonoBehaviour
             if(timer <= 0) {
                 itemShoot = false;
                 timer = 5f;
+            }
+        }
+
+        // Delats how often you can shoot
+        if(shootDelay) {
+            timer2 -= Time.deltaTime;
+            if(timer2 <= 0) {
+                shootDelay = false;
+                timer2 = 0.15f;
             }
         }
     }

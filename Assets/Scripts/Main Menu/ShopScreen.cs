@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartGame : MonoBehaviour
+public class ShopScreen : MonoBehaviour
 {
     public void ChangeScene()
     {
-        SceneManager.LoadScene("Loading");
+        SceneManager.LoadScene("Monetization");
     }
 }

@@ -25,7 +25,7 @@ public class Score : MonoBehaviour
     void Update()
     {
         // Time
-        timeElapsed = Time.time;
+        timeElapsed = Time.timeSinceLevelLoad;
 
         // Score
         if(!stopScore) {

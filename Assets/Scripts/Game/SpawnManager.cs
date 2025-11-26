@@ -56,7 +56,7 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         // Time
-        timeElapsed = Time.time;
+        timeElapsed = Time.timeSinceLevelLoad;
 
         // Starts a coroutine of spawning enemies every second
         if(timer <= 0f) {
