@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     float healthTimer;
     public Image health1;
     public Image health2;
+    public AudioSource audioData;
 
     void Start()
     {
@@ -48,6 +49,7 @@ public class PlayerHealth : MonoBehaviour
         if(health <= 0) {
             GameObject.Find("Game Manager").GetComponent<SceneLoader>().GameOver();
             GameObject.Find("Game Manager").GetComponent<Score>().StopScore();
+            GameObject.Find("Main Camera").GetComponent<Audio>().PlayerDeath();
             Destroy(gameObject);
             health1.enabled = false;
         }
@@ -59,6 +61,7 @@ public class PlayerHealth : MonoBehaviour
             health -= 1;
             invincible = true;
             health2.enabled = false;
+            audioData.PlayOneShot(audioData.clip);
         }
     }
 }

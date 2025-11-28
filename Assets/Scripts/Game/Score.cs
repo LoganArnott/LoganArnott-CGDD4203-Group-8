@@ -44,6 +44,8 @@ public class Score : MonoBehaviour
     public void StopScore()
     {
         stopScore = true;
-        PlayerPrefs.SetInt("Highscore", displayScore);
+        if((int)PlayerPrefs.GetInt("Highscore") < displayScore) {
+            PlayerPrefs.SetInt("Highscore", displayScore);
+        }
     }
 }

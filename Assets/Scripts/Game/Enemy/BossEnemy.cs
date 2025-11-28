@@ -6,6 +6,7 @@ public class BossEnemy : EnemyBase
 {
     public GameObject Enembullet;
     float timer;
+    public AudioSource audioData;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +57,7 @@ public class BossEnemy : EnemyBase
             GameObject g = Instantiate(Enembullet, shotSpawn, Quaternion.identity) as GameObject;
             Rigidbody bulletRig = g.GetComponent<Rigidbody>();
             bulletRig.velocity = transform.up * speed *-1 ;
+            audioData.PlayOneShot(audioData.clip);
             Destroy(g, 0.5f);
             StopCoroutine(Shoot());
     }

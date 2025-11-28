@@ -21,6 +21,7 @@ public class PlayerShoot : MonoBehaviour
     Vector3 height;
     float timer;
     float timer2;
+    public AudioSource audioData;
 
     // Start is called before the first frame update
     void Start()
@@ -66,7 +67,7 @@ public class PlayerShoot : MonoBehaviour
                     }
                     // Item Shoot
                     if((Mathf.Abs(endTouchPosition.x - startTouchPosition.x)) < dragDistance && 
-                       (endTime - startTime) > 3f && hasItem) {
+                       (endTime - startTime) > 1f && hasItem) {
                         ItemShoot();
                     }
                 }
@@ -94,7 +95,7 @@ public class PlayerShoot : MonoBehaviour
             }
         }
 
-        // Delats how often you can shoot
+        // Delays how often you can shoot
         if(shootDelay) {
             timer2 -= Time.deltaTime;
             if(timer2 <= 0) {
@@ -115,6 +116,7 @@ public class PlayerShoot : MonoBehaviour
         GameObject g = Instantiate (bullet, shotSpawn, Quaternion.identity) as GameObject;
         Rigidbody bulletRig = g.GetComponent<Rigidbody>();
         bulletRig.velocity = transform.up * speed;
+        audioData.PlayOneShot(audioData.clip);
         Destroy (g, 0.5f);
     }
 
@@ -127,6 +129,7 @@ public class PlayerShoot : MonoBehaviour
         // Creates 1 bullet at shotSpawn
         GameObject g = Instantiate (itemBullet, shotSpawn, Quaternion.identity) as GameObject;
         Rigidbody bulletRig = g.GetComponent<Rigidbody>();
+        audioData.PlayOneShot(audioData.clip);
         Destroy (g, 5f);
         hasItem = false;
     }

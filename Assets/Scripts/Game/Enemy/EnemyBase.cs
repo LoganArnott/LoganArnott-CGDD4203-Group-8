@@ -13,7 +13,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected Camera cam;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         speed = 5;
         points = 20;
@@ -31,6 +31,7 @@ public abstract class EnemyBase : MonoBehaviour
 
         // Destroys enemy is health == 0
         if(health == 0) {
+            GameObject.Find("Main Camera").GetComponent<Audio>().EnemyDeath();
             Destroy(gameObject);
             GameObject.Find("Game Manager").GetComponent<Score>().EnemyPoints(points);
         }
